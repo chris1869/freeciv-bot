@@ -26,7 +26,7 @@ Installation
 ------------
 
 ```
-sudo pip install https://github.com/chris1869/freeciv-bot
+sudo pip install git+https://github.com/chris1869/freeciv-bot
 
 sudo civ_prep_selenium.sh
 
