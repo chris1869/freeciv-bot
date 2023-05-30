@@ -4,9 +4,8 @@ Created on 19.12.2018
 @author: christian
 '''
 
-import gym_freeciv_web
-import gym
-from gym import wrappers, logger
+from gymnasium import gym
+from gymnasium import wrappers, logger
 import random
 import json
 import numpy
@@ -85,17 +84,15 @@ def main():
     outdir = '/tmp/random-agent-results'
     
     env = wrappers.Monitor(env, directory=outdir, force=True)
-    env.seed(0)
-    
-    agent = RandomAgent(env.action_space)
+        
+    observation, info = env.reset(seed=10)
+    for _ in range(1000):
+        action = env.action_space.sample()
+        observation, reward, terminated, truncated, info = env.step(action)
 
-    episode_count = 5
-    try:
-        for _ in range(episode_count):
-            reward, done  = agent.perform_episode(env)
-        # Close the env and write monitor result info to disk
-    finally:
-        env.close()
+        if terminated or truncated:
+            observation, info = env.reset()
+    env.close()
 
 if __name__ == '__main__':
     main()

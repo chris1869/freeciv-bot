@@ -13,8 +13,8 @@ dependencies = [
     "urllib3", 
     "BitVector", 
     "numpy", 
-    "tornado==6.3.2", 
-    "gym==0.10.9", 
+    "tornado==6.3.2",
+    "gymnasium",
     "selenium", 
     "websocket-client",
 ]
