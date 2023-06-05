@@ -790,20 +790,37 @@ class ActGoto(StdAction):
         dir8 = self.move_dir
         target_tile = self.newtile
         self.wait_for_pid = 63
+        # packet = {"pid"       : packet_unit_orders,
+        #           "unit_id"   : actor_unit['id'],
+        #           "src_tile"  : actor_unit['tile'],
+        #           "length"    : 1,
+        #           "repeat"    : False,
+        #           "vigilant"  : False,
+        #           "orders"    : [ORDER_MOVE],
+        #           "dir"       : [dir8],
+        #           "activity"  : [ACTIVITY_LAST],
+        #           "target"    : [EXTRA_NONE],
+        #           "action"    : [ACTION_COUNT],
+        #           "dest_tile" : target_tile['index'],
+        #           "extra"     : [EXTRA_NONE]
+        #           }
         packet = {"pid"       : packet_unit_orders,
                   "unit_id"   : actor_unit['id'],
                   "src_tile"  : actor_unit['tile'],
                   "length"    : 1,
                   "repeat"    : False,
                   "vigilant"  : False,
-                  "orders"    : [ORDER_MOVE],
-                  "dir"       : [dir8],
-                  "activity"  : [ACTIVITY_LAST],
-                  "target"    : [EXTRA_NONE],
-                  "action"    : [ACTION_COUNT],
-                  "dest_tile" : target_tile['index'],
-                  "extra"     : [EXTRA_NONE]
+                  "orders"    : [{"order":ORDER_MOVE, 
+                                  "activity":ACTIVITY_LAST,
+                                  "target":EXTRA_NONE,
+                                  "sub_target" : 0,
+                                  "action":ACTION_COUNT,
+                                  "dir":dir8
+                                  }],
+                #   "extra"     : [EXTRA_NONE]
+                  "dest_tile" : target_tile['index']
                   }
+
         return packet
 
 class ActNuke(UnitAction):
